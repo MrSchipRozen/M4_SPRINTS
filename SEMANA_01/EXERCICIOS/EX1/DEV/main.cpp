@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
+using namespace std;
 
-// 1 -  Faça uma função que recebe uma certa medida e ajusta ela percentualmente 
+// 1 -  Faça uma função que recebe uma certa valor e ajusta ela percentualmente 
 // entre dois valores mínimo e máximo e retorna esse valor
 
 // 2 - Faça uma função que simule a leitura de um sensor lendo o 
 // valor do teclado ao final a função retorna este valor
 
-// 3 - Faça uma função que armazena uma medida inteira qualquer 
+// 3 - Faça uma função que armazena uma valor inteira qualquer 
 // em um vetor fornecido. Note que como C não possui vetores 
 // nativos da linguagem, lembre-se que você precisa passar o 
 // valor máximo do vetor assim como a última posição preenchida
@@ -29,7 +30,7 @@
 // retorna verdadeiro ou falso
 
 
-// 6 - A função abaixo (que está incompleta) vai "dirigindo" virtualmente um robô 
+// 6 - A função abaixo (que está incompleta) vai "d" virtualmente um robô 
 // e através de 4 sensores em cada um dos 4 pontos do robo ("Direita", "Esquerda", 
 // "Frente", "Tras"). 
 //      A cada passo, ele verifica as distâncias aos objetos e vai mapeando o terreno 
@@ -43,45 +44,82 @@
 // enviado pelo usuário. 
 //
 //      Complete a função com a chamada das funções já criadas
-int dirige(int *v,int maxv){
-	int maxVetor = maxv;
-	int *vetorMov = v;
-	int posAtualVetor = 0;
-	int dirigindo = 1;		
-	while(dirigindo){		
-		int medida = /// .. Chame a função de de leitura da medida para a "Direita"
-		medida = converteSensor(medida,0,830);
-		posAtualVetor = // Chame a função para armazenar a medida no vetor
-        ///////////////////////////////////////////////////////////////////////////		
-		// Repita as chamadas acima para a "Esquerda", "Frente", "Tras"
-		// ................
-		///////////////////////////////////////////////////////////////////////////
-		dirigindo = leComando();		
-	}
-	return posAtualVetor;
+
+int converteSensor(int vMin,int x,,int Vmax){
+	Vmax = Vmax - vMin;
+	x = x - vMin;
+	int a = (x*100)/Vmax;
+	return a;
 }
 
+int leituraSensor(){
+    int n = 0;
+    printf("Por favor insira um numero:  ");
+    c >> n;
+    return n;
+}
 
-// O trecho abaixo irá utilizar as funções acima para ler os sensores e o movimento
-// do robô e no final percorrer o vetor e mostrar o movimento a cada direção baseado 
-// na maior distância a cada movimento
-void percorre(int *v,int tamPercorrido){		
-	int *vetorMov = v;
-	int maiorDir = 0;
-	
-	for(int i = 0; i< tamPercorrido; i+=4){
-		char *direcao = direcaoMenorCaminho(&(vetorMov[i]),&maiorDir);
-		printf("Movimentando para %s distancia = %i\n",direcao,maiorDir);
+int armazenaVetor(int t,int x, int *vetor,int sposi){
+    int *vp = vetor;
+	vp[sposi] = x;
+	vp[t];
+    return (sposi + 1);
+} 
+
+const char *direcaoMenorCaminho(int *direcao,int *vetor){
+	const char *sentidos[] = {"Esquerda", "Direita", "Tras", "Frente"};
+	int l = 0;
+	for (int s = 0; s < 4; s++) {
+		if (vetor[s] > *direcao){
+			*direcao = vetor[s];
+			l = s;
+		}
+	}
+	return sentidos[l];
+}
+
+int leComando(){
+	int resposta = 0;
+	printf("Voce deseja continuar ? Veja as opcoes (1 - Sim / 0 - Não) \n ") ;
+	scanf(" %d ", &resposta);
+	if (resposta == 1) {
+		return 1;
+	}
+	else {
+		return 0;
 	}
 }
 
-int main(int argc, char** argv) {
-	int maxVetor = 100;
-	int vetorMov[maxVetor*4];
-	int posAtualVet = 0;
-	
-	posAtualVet = dirige(vetorMov,maxVetor);
-	percorre(vetorMov,posAtualVet);
-	
+int dirige(int mvint *i){
+	int *vMov = i;
+	int posvetor = 0;
+	int mVetor = mv;
+	int d = 1;		
+	while(d == 1){
+		for (int i = 0; i < 4; i++)	{
+			int valor = leituraSensor();
+			valor = converteSensor(valor,0,830);
+			posvetor = armazenaVetor(mVetor,valor,posvetor,vMov);
+		}			
+		d = leComando();		
+	}
+	return posvetor;
+}
+
+void percorre(int *v,int distanciaT){			
+	int mD = 0;
+	int *vMov = v;
+	for(int i = 0; i< distanciaT; i+=4){
+		const char *direcao = direcaoMenorCaminho(&(vMov[i]),&mD);
+		printf(" Movimentando para %s distancia = %i\n ", direcao,mD);
+	}
+}
+
+int main(int f, char** g) {
+	int vMov[mVetor*4];
+	int mVetor = 100;
+	int pav = 0;
+	pav = dirige(vMov,mVetor);
+	percorre(pav,vMov);
 	return 0;
 }
