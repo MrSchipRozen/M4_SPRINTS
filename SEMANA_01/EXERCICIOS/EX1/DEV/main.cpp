@@ -45,26 +45,27 @@ using namespace std;
 //
 //      Complete a função com a chamada das funções já criadas
 
-int converteSensor(int vMin,int x,,int Vmax){
-	Vmax = Vmax - vMin;
-	x = x - vMin;
-	int a = (x*100)/Vmax;
-	return a;
-}
+int guardarvetor(int t,int x, int *vetor,int sposi){
+    int *vp = vetor;
+	vp[sposi] = x;
+	vp[t];
+    return (sposi + 1);
+} 
 
-int leituraSensor(){
+int lersensor(){
     int n = 0;
     printf("Por favor insira um numero:  ");
     c >> n;
     return n;
 }
 
-int armazenaVetor(int t,int x, int *vetor,int sposi){
-    int *vp = vetor;
-	vp[sposi] = x;
-	vp[t];
-    return (sposi + 1);
-} 
+int converter(int vMin,int x,,int Vmax){
+	Vmax = Vmax - vMin;
+	x = x - vMin;
+	int a = (x*100)/Vmax;
+	return a;
+}
+
 
 const char *direcaoMenorCaminho(int *direcao,int *vetor){
 	const char *sentidos[] = {"Esquerda", "Direita", "Tras", "Frente"};
@@ -97,9 +98,9 @@ int dirige(int mvint *i){
 	int d = 1;		
 	while(d == 1){
 		for (int i = 0; i < 4; i++)	{
-			int valor = leituraSensor();
-			valor = converteSensor(valor,0,830);
-			posvetor = armazenaVetor(mVetor,valor,posvetor,vMov);
+			int valor = lersensor();
+			valor = converter(valor,0,830);
+			posvetor = guardarvetor(mVetor,valor,posvetor,vMov);
 		}			
 		d = leComando();		
 	}
